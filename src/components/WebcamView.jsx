@@ -10,9 +10,14 @@ const WebcamView = () => {
     const webcamRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [detectLoader, setDetectLoader] = useState(false);
+    const [currUser, setCurrUser] = useState(false);
 
     // Load models on mount
     useEffect(() => {
+        const currUser = JSON.parse(localStorage.getItem("moody_player_user"));
+        if (currUser) {
+            setCurrUser(true);
+        }
         const loadModels = async () => {
             const MODEL_URL = "/models";
             await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
@@ -27,7 +32,7 @@ const WebcamView = () => {
 
         const currUser = JSON.parse(localStorage.getItem("moody_player_user"));
         if (!currUser) {
-            toast.info("Please login to access this feature.");
+            toast.error("Please login to access this feature.");
             return;
         }
 
@@ -83,7 +88,9 @@ const WebcamView = () => {
             )}
             <div className="mood-display">
                 <span className="label">Current Mood:</span>
-                {webcamRef.current?.stream?.active && detectLoader ? (
+                {webcamRef.current?.stream?.active &&
+                detectLoader &&
+                currUser ? (
                     <p>Detecting Mood...</p>
                 ) : (
                     <span className="value">
