@@ -6,7 +6,7 @@ const Songs = () => {
     const { songs, emotion, setCurrentSong, currentSong } =
         useContext(PlayerContext);
 
-    const filteredSongs = songs.filter((item) => item.mood === emotion);
+    const filteredSongs = songs?.filter((item) => item.mood === emotion);
 
     const audioRef = useRef(null);
 
@@ -36,7 +36,7 @@ const Songs = () => {
             <p>Let the Music Feel What You Feel</p>
 
             <div className="all_songs_card">
-                {filteredSongs.length > 0 ? (
+                {filteredSongs?.length > 0 ? (
                     filteredSongs.map((item) => (
                         <div className="song_card" key={item._id}>
                             <div className="song_info">
