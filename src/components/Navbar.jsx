@@ -41,7 +41,19 @@ const Navbar = () => {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/songs_library">Library</Link>
+                            <Link
+                                to="/songs_library"
+                                onClick={(e) => {
+                                    if (!currUser) {
+                                        e.preventDefault(); // stop navigation
+                                        toast.warn(
+                                            "Please login to access Library"
+                                        );
+                                    }
+                                }}
+                            >
+                                Library
+                            </Link>
                         </li>
                         {/* <li>
                             <Link to="/mood-history">Mood History</Link>

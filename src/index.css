@@ -252,6 +252,9 @@ body {
 .admin_login_wrapper .admin-login form button:hover {
   background-color: #1ed760;
 }
+.admin_login_wrapper .admin-login form button:active {
+  scale: 0.99;
+}
 
 .navbar {
   height: 70px;

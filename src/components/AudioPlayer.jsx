@@ -8,7 +8,6 @@ const AudioPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
 
-    console.log(currentSong);
     useEffect(() => {
         if (audioRef.current && currentSong) {
             audioRef.current.load();
